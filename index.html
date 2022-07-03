@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Juego del ahorcado</title>
+  </head>
+  <body>
+    <header>
+      <img src="/assets/img/a-svg.svg" alt="Logo de Alura" />
+    </header>
+
+    <article class="screen1">
+      <button class="startGame">Iniciar juego</button>
+      <button class="addNewWord">Agregar nueva palabra</button>
+    </article>
+    <article class="none screen2">
+      <textarea class="input" placeholder="Ingrese el texto aqui"></textarea>
+      <div class="alertContainer">
+        <img
+          src="/assets/img/bi_exclamation-circle-fill.svg"
+          alt="Signo de exclamación"
+        />
+        <p>Máx. de 8 letras</p>
+      </div>
+      <div class="btnContainer">
+        <button class="saveAndStart">Guardar y empezar</button>
+        <button class="cancel">Cancelar</button>
+      </div>
+    </article>
+    <article class="none screen3">
+      <input type="text" class="magic" />
+      <div class="imgContainer">
+        <img
+          src="/assets/img/gallow-0.svg.svg"
+          alt="gallow-0"
+          class="gallow0 isActive"
+        />
+        <img
+          src="/assets/img/gallow-1.svg.svg"
+          alt="gallow-1"
+          class="gallow1 none"
+        />
+        <img
+          src="/assets/img/gallow-2.svg.svg"
+          alt="gallow-2"
+          class="gallow2 none"
+        />
+        <img
+          src="/assets/img/gallow-3.svg.svg"
+          alt="gallow-3"
+          class="gallow3 none"
+        />
+        <img
+          src="/assets/img/gallow-4.svg.svg"
+          alt="gallow-4"
+          class="gallow4 none"
+        />
+        <img
+          src="/assets/img/gallow-5.svg.svg"
+          alt="gallow-5"
+          class="gallow5 none"
+        />
+        <img
+          src="/assets/img/gallow-6.svg.svg"
+          alt="gallow-6"
+          class="gallow6 none"
+        />
+      </div>
+      <div class="letterContainer"></div>
+      <div class="letter"></div>
+
+      <div class="btnContainer">
+        <button class="newGame">Nuevo juego</button>
+        <button class="desist">Desistir</button>
+      </div>
+    </article>
+    <footer class="footer">
+      <small
+        >Sitio maquetado y programado por
+        <a href="https://instagram.com/aegm0143" target="_blank" rel="noopener"
+          >@aegm0143</a
+        ></small
+      >
+    </footer>
+    <script src="/script.js"></script>
+  </body>
+</html>
