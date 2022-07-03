@@ -293,20 +293,24 @@
         // Lose - If that is activated when you lose
         if (wrongLetters.length > 5) {
           console.log("Perdiste");
+          $magic.removeEventListener("keyup", keyupFunction);
           d.removeEventListener("keyup", keyupFunction);
           $letter.innerHTML = `<p><b>Perdiste</b></p>`;
         }
         // Win - If that is activated when you win
         if (rightWord.length === word.length) {
           console.log("Ganaste");
+          $magic.removeEventListener("keyup", keyupFunction);
           d.removeEventListener("keyup", keyupFunction);
           $letter.innerHTML = `<p><b>Ganaste</b></p>`;
         }
       }
 
       if (screen.width < 768) {
+        d.removeEventListener("keyup", keyupFunction);
         $magic.addEventListener("keyup", keyupFunction);
       } else {
+        $magic.removeEventListener("keyup", keyupFunction);
         d.addEventListener("keyup", keyupFunction);
       }
 
