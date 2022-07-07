@@ -293,27 +293,76 @@
         // Lose - If that is activated when you lose
         if (wrongLetters.length > 5) {
           console.log("Perdiste");
-          $magic.removeEventListener("keyup", keyupFunction);
           d.removeEventListener("keyup", keyupFunction);
           $letter.innerHTML = `<p><b>Perdiste</b></p>`;
+          $magic.removeEventListener("keyup", keyboard);
+          $magic.removeEventListener("click", hideBtn);
+          setTimeout(() => {
+            $newGame.classList.remove("none");
+            $desist.classList.remove("none");
+          }, 1500);
         }
         // Win - If that is activated when you win
         if (rightWord.length === word.length) {
           console.log("Ganaste");
-          $magic.removeEventListener("keyup", keyupFunction);
           d.removeEventListener("keyup", keyupFunction);
           $letter.innerHTML = `<p><b>Ganaste</b></p>`;
+          $magic.removeEventListener("keyup", keyboard);
+          $magic.removeEventListener("click", hideBtn);
+          setTimeout(() => {
+            $newGame.classList.remove("none");
+            $desist.classList.remove("none");
+          }, 1500);
         }
       }
 
-      if (screen.width < 768) {
-        d.removeEventListener("keyup", keyupFunction);
-        $magic.addEventListener("keyup", keyupFunction);
-      } else {
-        $magic.removeEventListener("keyup", keyupFunction);
-        d.addEventListener("keyup", keyupFunction);
+      /////
+
+      //detecta mobile
+      function detectMob() {
+        const toMatch = [
+          /Android/i,
+          /webOS/i,
+          /iPhone/i,
+          /iPad/i,
+          /iPod/i,
+          /BlackBerry/i,
+          /Windows Phone/i,
+        ];
+
+        return toMatch.some((toMatchItem) => {
+          return true;
+        });
       }
 
+      //Funcion teclado en movil
+      function keyboard(e) {
+        let $key;
+        //pregunta si es mobile y transofrma el keycode a CharCode
+        let keyCode = e.keyCode || e.which;
+        if (keyCode == 0 || keyCode == 229) {
+          keyCode = e.target.value
+            .charAt(e.target.selectionStart - 1)
+            .charCodeAt();
+        }
+        $key = String.fromCharCode(keyCode);
+
+        hanged(text, $key.toLocaleLowerCase());
+      }
+      // Detecta el mobile y activa un listener u otro
+      if (detectMob() === true) {
+        d.removeEventListener("keyup", keyupFunction);
+        $magic.addEventListener("keyup", keyboard);
+        // Desaparece botones y aparecen cuando ganas
+        $magic.addEventListener("click", hideBtn);
+        function hideBtn() {
+          $newGame.classList.add("none");
+          $desist.classList.add("none");
+        }
+      } else {
+        d.addEventListener("keyup", keyupFunction);
+      }
+      //////
       // Function that must be integrated in the addEventListener
       function keyupFunction(e) {
         if (letterValidation(e.key) === undefined) {
