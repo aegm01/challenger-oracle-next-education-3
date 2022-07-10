@@ -161,6 +161,7 @@
 
       const rightWord = [];
       const wrongLetters = [];
+
       // Hanged
       function hanged(word, letter) {
         if (word.includes(letter)) {
@@ -244,8 +245,12 @@
           }
         } else {
           // Group of wrong letters
+          if (wrongLetters.includes(letter)) {
+            return;
+          } else {
+            wrongLetters.push(letter);
+          }
           $letter.innerHTML = `<p>${wrongLetters}</p>`;
-          wrongLetters.push(letter);
         }
 
         // Makeover - Change the img depending on the number of elements in the array "wrongLetters"
@@ -316,9 +321,7 @@
         }
       }
 
-      /////
-
-      //detecta mobile
+      // Detect if it was opened from mobile or tablet
       function detectMob() {
         const toMatch = [
           /Android/i,
@@ -331,11 +334,11 @@
         ];
 
         return toMatch.some((toMatchItem) => {
-          return true;
+          return navigator.userAgent.match(toMatchItem);
         });
       }
 
-      //Funcion teclado en movil
+      //Function that replaces the keyupFunction on mobile and tablet
       function keyboard(e) {
         let $key;
         //pregunta si es mobile y transofrma el keycode a CharCode
@@ -347,13 +350,18 @@
         }
         $key = String.fromCharCode(keyCode);
 
-        hanged(text, $key.toLocaleLowerCase());
+        if (letterValidation($key.toLocaleLowerCase()) === undefined) {
+          return;
+        } else {
+          hanged(text, $key.toLocaleLowerCase());
+        }
       }
+
       // Detecta el mobile y activa un listener u otro
       if (detectMob() === true) {
         d.removeEventListener("keyup", keyupFunction);
         $magic.addEventListener("keyup", keyboard);
-        // Desaparece botones y aparecen cuando ganas
+        // Buttons disappear when a player wins or loses
         $magic.addEventListener("click", hideBtn);
         function hideBtn() {
           $newGame.classList.add("none");
@@ -362,7 +370,7 @@
       } else {
         d.addEventListener("keyup", keyupFunction);
       }
-      //////
+
       // Function that must be integrated in the addEventListener
       function keyupFunction(e) {
         if (letterValidation(e.key) === undefined) {
